@@ -1,7 +1,7 @@
 'use strict'
 const SHA256 = require('crypto-js/sha256');
 let currentDate = new Date();
-
+// let consoleCounter = 0;
 class Block {
     constructor(index, timestamp, data, previousHash = '') {
         this.index = index;
@@ -9,15 +9,39 @@ class Block {
         this.data = data;
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
+        this.nonce = 0;
     }
 
     calculateHash() {
-        return SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash).toString();
+        return SHA256(this.index + this.timestamp + JSON.stringify(this.data) + this.previousHash + this.nonce).toString();
+    }
+
+    // generateString(length) {
+    //     const characters ='abcdefghijklmnopqrstuvwxyz0123456789';
+    //     let result = '';
+    //     const charactersLength = characters.length;
+    //     for ( let i = 0; i < length; i++ ) {
+    //         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    //     }
+
+    //     return result;
+    // }
+
+    mineBlock(difficulty){
+        // let randomNum = this.generateString(difficulty);
+
+        while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){//`${randomNum}`){
+            this.nonce++;
+            this.hash = this.calculateHash()
+        }
+        // consoleCounter++;
+        // console.log(`Block No.${consoleCounter} = ${this.nonce}`);
     }
 }
 
 class Blockchain {
     constructor() {
+        this.difficulty = 4;
         this.chain = [this.createGenesisBlock()];
     }
 
@@ -31,7 +55,8 @@ class Blockchain {
 
     addBlock(newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        // newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     }
 
@@ -70,5 +95,5 @@ for (let i = 1; i < counter; i++) {
 // runeCoins.chain[3].hash = runeCoins.chain[3].calculateHash()
 
 // console.log("Valid Block = "+runeCoins.isBlockChainValid())
-// console.log(JSON.stringify(runeCoins, null, 4))
+console.log(JSON.stringify(runeCoins, null, 4))
 
