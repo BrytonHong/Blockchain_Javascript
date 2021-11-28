@@ -1,0 +1,29 @@
+{
+  "name": "blockchain_javascript",
+  "version": "1.0.0",
+  "description": "Blockchain concept using Javascript",
+  "main": "index.js",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "elliptic": "^6.5.4",
+    "eslint": "^8.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrytonHong/Blockchain_Javascript.git"
+  },
+  "keywords": [
+    "Blockchain",
+    "javascript"
+  ],
+  "author": "Bryton Hong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrytonHong/Blockchain_Javascript/issues"
+  },
+  "homepage": "https://github.com/BrytonHong/Blockchain_Javascript#readme"
+}
